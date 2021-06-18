@@ -3,7 +3,7 @@ import { MpcState } from 'setup-mpc-common';
 
 export function defaultState(latestBlock: number, network: any): MpcState {
   return {
-    name: 'PlatON MPC',
+    name: 'Lumino',
     sequence: 0,
     statusSequence: 0,
     startSequence: 0,
@@ -13,8 +13,8 @@ export function defaultState(latestBlock: number, network: any): MpcState {
     endTime: moment().add(1440, 'hour'),
     network: network,
     latestBlock,
-    selectBlock: latestBlock + 1,
-    maxTier2: 0,
+    selectBlock: latestBlock + 81338,
+    maxTier2: 1000,
     minParticipants: 10,
     filesCount: 17,
     invalidateAfter: 54000,

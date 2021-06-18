@@ -98,7 +98,7 @@ impl<E: Engine> FileG1<E> {
     pub fn write<W: Write>(&self, writer: &mut W) -> io::Result<()> {
         #[cfg(feature = "time_log")]
         let start = std::time::Instant::now();
-        
+
         fn write_point_vec<W, G>(writer: &mut W, vec: &Vec<G>) -> io::Result<()>
         where
             W: Write,
@@ -324,12 +324,11 @@ fn test_zero_point() {
 
 #[test]
 fn test_size() {
-
     let g1 = bls12_381::G1Affine::one();
     let length = g1.into_uncompressed().as_ref().len();
-    println!("bls12: {}",length);
+    println!("bls12: {}", length);
 
     let g2 = bn256::G1Affine::one();
     let length2 = g2.into_uncompressed().as_ref().len();
-    println!("bn: {}",length2);
+    println!("bn: {}", length2);
 }

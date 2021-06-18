@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import VTooltip from 'v-tooltip'
 import './assets/style/index.scss'
+
+Vue.use(VTooltip, {
+  defaultHtml: false
+})
 
 Vue.config.productionTip = false
 

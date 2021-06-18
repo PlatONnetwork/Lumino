@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { Participant } from 'setup-mpc-common';
-import { Wallet } from '@fksyuan/web3x/wallet';
+import { Wallet } from '@alayanetwork/web3x/wallet';
 import { createParticipant } from './create-participant';
 import { orderWaitingParticipants } from './order-waiting-participants';
 

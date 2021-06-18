@@ -1,9 +1,9 @@
 import humanizeDuration from 'humanize-duration';
 import moment, { Moment } from 'moment';
 import { cloneMpcState, MpcState, Participant } from 'setup-mpc-common';
-import { Account } from '@fksyuan/web3x/account';
-import { Address } from '@fksyuan/web3x/address';
-import { leftPad } from '@fksyuan/web3x/utils';
+import { Account } from '@alayanetwork/web3x/account';
+import { Address } from '@alayanetwork/web3x/address';
+import { leftPad } from '@alayanetwork/web3x/utils';
 import { TerminalKit } from './terminal-kit';
 
 export class TerminalInterface {
@@ -20,7 +20,7 @@ export class TerminalInterface {
   private render() {
     this.term.clear();
     this.term.hideCursor();
-    this.term.cyan('PlatON Trustless Setup Multi Party Computation\n\n');
+    this.term.cyan('Latticex Trustless Setup Multi Party Computation\n\n');
     this.renderStatus();
     this.renderList();
   }

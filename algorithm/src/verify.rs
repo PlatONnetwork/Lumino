@@ -156,9 +156,6 @@ pub fn verify_derivation<E: Engine>(
         }
     }
 
-    // Print log
-    println!("progress {}", 1);
-
     Ok(())
 }
 
@@ -168,6 +165,9 @@ pub fn verify_derivation<E: Engine>(
 // 2: right = x^2.z + ... + x^n.z^(n-1)
 // Finally check left*x == right by pairing
 pub fn verify_consistence<E: Engine>(current_path: &PathBuf) -> Result<(), MpcCeremonyError> {
+    // Print log
+    println!("progress {}", 1);
+
     // Read current file 0
     let cur_first_file_name = get_file_name(current_path, 0);
     let file_in = OpenOptions::new()

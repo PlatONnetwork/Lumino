@@ -14,7 +14,7 @@ export class Downloader extends EventEmitter {
   }
 
   public async run() {
-    //console.error('Downloader starting...');
+    // console.log('Downloader starting...: ', new Date());
     while (true) {
       const transcript = await this.queue.get();
       if (!transcript) {
@@ -22,7 +22,7 @@ export class Downloader extends EventEmitter {
       }
       await this.downloadTranscriptWithRetry(transcript);
     }
-    //console.error('Downloader complete.');
+    // console.log('Downloader complete at: ', new Date());
   }
 
   public put(transcript: Transcript) {

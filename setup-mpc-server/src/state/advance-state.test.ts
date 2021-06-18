@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { cloneMpcState, MpcState } from 'setup-mpc-common';
-import { Wallet } from '@fksyuan/web3x/wallet';
+import { Wallet } from '@alayanetwork/web3x/wallet';
 import { TranscriptStore } from '../transcript-store';
 import { Verifier } from '../verifier';
 import { advanceState } from './advance-state';

@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { Participant } from 'setup-mpc-common';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 
 export function createParticipant(
   sequence: number,

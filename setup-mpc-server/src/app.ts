@@ -10,8 +10,8 @@ import { hashFiles, MpcServer } from 'setup-mpc-common';
 import { PassThrough } from 'stream';
 import meter from 'stream-meter';
 import { isNumber, isString } from 'util';
-import { Address } from '@fksyuan/web3x/address';
-import { bufferToHex, randomBuffer, recover } from '@fksyuan/web3x/utils';
+import { Address } from '@alayanetwork/web3x/address';
+import { bufferToHex, randomBuffer, recover } from '@alayanetwork/web3x/utils';
 import { writeFileAsync } from './fs-async';
 import { ParticipantSelectorFactory } from './participant-selector';
 import { defaultState } from './state/default-state';
@@ -121,8 +121,9 @@ export function appFactory(
   });
 
   router.put('/participant/:address', adminAuth, async (ctx: Koa.Context) => {
+    console.log('add participant tier=', ctx.query.tier);
     const address = Address.fromString(ctx.params.address.toLowerCase());
-    server.addParticipant(address, +ctx.query.tier || 2);
+    server.addParticipant(address, +ctx.query.tier);
     ctx.status = 204;
   });
 
@@ -156,8 +157,26 @@ export function appFactory(
     ctx.body = await server.downloadSignature(Address.fromString(address.toLowerCase()), num);
   });
 
-  router.get('/data/:address/:num', async (ctx: Koa.Context) => {
+  router.get('/txHash/:address/:num', async (ctx: Koa.Context) => {
     const { address, num } = ctx.params;
+    ctx.body = await server.downloadTxHash(Address.fromString(address.toLowerCase()), num);
+  });
+
+  router.get('/data/:address/:num', async (ctx: Koa.Context) => {
+    let { address, num } = ctx.params;
+    if(isNaN(Number(num))) {
+      try {
+        let fileName = num.toString().split(".")[0];
+        num = parseInt(fileName.split("_")[1]);
+        if (isNaN(num) || !isNumber(num)) {
+          ctx.status = 400;
+          return;
+        }
+      } catch (err) {
+        ctx.status = 400;
+        return;
+      }
+    }
     ctx.body = await server.downloadData(Address.fromString(address.toLowerCase()), num);
   });
 

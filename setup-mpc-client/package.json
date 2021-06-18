@@ -28,6 +28,6 @@
     "moment": "^2.24.0",
     "progress-stream": "^2.0.0",
     "terminal-kit": "^1.28.7",
-    "@fksyuan/web3x": "^4.0.3"
+    "@alayanetwork/web3x": "^4.0.3"
   }
 }

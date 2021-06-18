@@ -16,6 +16,31 @@
     underscore "1.9.1"
     utf8 "3.0.0"
 
+"@alayanetwork/web3x@^4.0.3":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@alayanetwork/web3x/-/web3x-4.0.7.tgz#92854b83ee32b63cfe06d232980150e579997bae"
+  integrity sha512-fDeWSlbAaNTbsjxKx2jXNbIk+8sdwbaTs/t/LIChfGV2zmBjHgYbxYaCB5ApRwzHC8vfQDa+xX2skxBDn5r/QQ==
+  dependencies:
+    "@alayanetwork/web3-utils" "^0.13.2"
+    "@types/bn.js" "^4.11.2"
+    "@types/node" "^10.12.18"
+    "@types/ws" "^6.0.1"
+    bip39 "^2.5.0"
+    bn.js "^4.11.8"
+    browserify-aes "^1.2.0"
+    elliptic "^6.4.0"
+    hdkey "^1.1.0"
+    idna-uts46-hx "^2.3.1"
+    isomorphic-fetch "^2.2.1"
+    isomorphic-ws "^4.0.1"
+    pbkdf2 "^3.0.17"
+    randombytes "^2.0.6"
+    rlp "^2.2.3"
+    swarm-js "^0.1.39"
+    tslib "^1.9.3"
+    utf8 "^3.0.0"
+    ws "^6.1.0"
+
 "@babel/code-frame@^7.0.0":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
@@ -43,31 +68,6 @@
     node-bitmap "0.0.1"
     omggif "^1.0.5"
     pngjs "^2.0.0"
-
-"@fksyuan/web3x@^4.0.3":
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/@fksyuan/web3x/-/web3x-4.0.8.tgz#3acdd70e2e8505d786e5a004c02d1e978b2c2615"
-  integrity sha512-hhjLKcG1+nr+QQrb/Oxrv/zMChJbCUisSScfjDl+5KFufQZJNNJ0vtY5GQPipxG11HisjdMqmRHDlt/MBvz4Yg==
-  dependencies:
-    "@alayanetwork/web3-utils" "^0.13.2"
-    "@types/bn.js" "^4.11.2"
-    "@types/node" "^10.12.18"
-    "@types/ws" "^6.0.1"
-    bip39 "^2.5.0"
-    bn.js "^4.11.8"
-    browserify-aes "^1.2.0"
-    elliptic "^6.4.0"
-    hdkey "^1.1.0"
-    idna-uts46-hx "^2.3.1"
-    isomorphic-fetch "^2.2.1"
-    isomorphic-ws "^4.0.1"
-    pbkdf2 "^3.0.17"
-    randombytes "^2.0.6"
-    rlp "^2.2.3"
-    swarm-js "^0.1.39"
-    tslib "^1.9.3"
-    utf8 "^3.0.0"
-    ws "^6.1.0"
 
 "@types/bn.js@^4.11.2":
   version "4.11.5"

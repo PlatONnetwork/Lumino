@@ -1,7 +1,7 @@
 import { createReadStream, mkdirSync } from 'fs';
 import moment = require('moment');
 import { Readable } from 'stream';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 import {
   copyFileAsync,
   existsAsync,
@@ -24,10 +24,12 @@ export interface TranscriptStore {
   save(address: Address, num: number, transcriptPath: string, signaturePath: string): Promise<void>;
   loadTranscript(address: Address, num: number): Readable;
   getTranscriptSignature(address: Address, num: number): Promise<string>;
+  getTranscriptTxHash(address: Address, num: number): Promise<string>;
   makeLive(address: Address): Promise<void>;
   getVerifiedBasePath(address: Address): string;
   getVerifiedTranscriptPath(address: Address, num: number): string;
   getVerifiedSignaturePath(address: Address, num: number): string;
+  getVerifiedTxHashPath(address: Address, num: number): string;
   getUnverifiedBasePath(address: Address): string;
   getUnverifiedTranscriptPath(address: Address, num: number): string;
   getUnverifiedSignaturePath(address: Address, num: number): string;
@@ -90,6 +92,10 @@ export class DiskTranscriptStore implements TranscriptStore {
     return (await readFileAsync(this.getVerifiedSignaturePath(address, num))).toString();
   }
 
+  public async getTranscriptTxHash(address: Address, num: number) {
+    return (await readFileAsync(this.getVerifiedTxHashPath(address, num))).toString();
+  }
+
   public getVerifiedBasePath(address: Address) {
     return `${this.verifiedPath}/${address.toString().toLowerCase()}`;
   }
@@ -106,6 +112,10 @@ export class DiskTranscriptStore implements TranscriptStore {
     return `${this.getVerifiedBasePath(address)}/file_${num}.sig`;
   }
 
+  public getVerifiedTxHashPath(address: Address, num: number) {
+    return `${this.getVerifiedBasePath(address)}/file_${num}.txh`;
+  }
+
   public getUnverifiedTranscriptPath(address: Address, num: number) {
     return `${this.getUnverifiedBasePath(address)}/file_${num}.dat`;
   }
@@ -119,6 +129,7 @@ export class DiskTranscriptStore implements TranscriptStore {
       return [];
     }
     let files = await readdirAsync(dir);
+    files = files.filter(path => !path.endsWith('.txh'));
     if (!includeSignatures) {
       files = files.filter(path => path.endsWith('.dat'));
     }

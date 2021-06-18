@@ -93,6 +93,11 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
+*{
+  box-sizing: border-box;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -147,6 +152,7 @@ tbody {
   display: block;
 }
 
+
 /*包含以下四种的链接*/
 a {
   text-decoration: none;
@@ -199,16 +205,6 @@ a:active {
   overflow-x: hidden !important;
 }
 
-thead,
-tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-tbody thead {
-  width: calc(100% + 20px);
-}
-
 a:link {
   color: rgb(212, 212, 212);
 }
@@ -224,3 +220,20 @@ a:hover {
 a:active {
   color: rgb(31, 219, 233);
 } /* 鼠标点中激活链接 蓝色 */
+
+::-webkit-scrollbar{
+  /*width: 0;宽度为0隐藏*/
+ width: 2px;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 2px;
+  height: 50px;
+  background: #eee;
+}
+
+::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  background: rgba(0,0,0,0.4);
+}

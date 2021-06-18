@@ -46,7 +46,11 @@ pub fn setup_init<E: Engine>(
         print!("creating 0:{}", FirstFile::<E>::get_size());
         for i in 1..(g1_file_num + 1) {
             let file_header = FileHeader::new(0, i, g1_file_num, g1_num);
-            print!(" {}:{}", file_header.file_idx, FileG1::<E>::get_size(&file_header));
+            print!(
+                " {}:{}",
+                file_header.file_idx,
+                FileG1::<E>::get_size(&file_header)
+            );
         }
         print!("\n");
     }
@@ -127,7 +131,11 @@ pub fn setup<E: Engine>(
         print!("creating 0:{}", FirstFile::<E>::get_size());
         for i in 1..(g1_file_num + 1) {
             let file_header = FileHeader::new(0, i, g1_file_num, g1_num);
-            print!(" {}:{}", file_header.file_idx, FileG1::<E>::get_size(&file_header));
+            print!(
+                " {}:{}",
+                file_header.file_idx,
+                FileG1::<E>::get_size(&file_header)
+            );
         }
         print!("\n");
     }

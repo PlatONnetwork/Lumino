@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 import { EthNet } from 'setup-mpc-common';
-import { Address } from '@fksyuan/web3x/address';
-import { Eth } from '@fksyuan/web3x/eth';
-import { HttpProvider } from '@fksyuan/web3x/providers';
+import { Address } from '@alayanetwork/web3x/address';
+import { Eth } from '@alayanetwork/web3x/eth';
+import { HttpProvider } from '@alayanetwork/web3x/providers';
 import { getNetwork } from "./network";
 
 export class ParticipantSelectorFactory {

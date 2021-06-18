@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { Readable } from 'stream';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 
 export type CeremonyState =
   | 'PRESELECTION'
@@ -123,6 +123,7 @@ export interface MpcServer {
   updateParticipant(participant: Participant, admin?: boolean): Promise<void>;
   downloadData(address: Address, transcriptNumber: number): Promise<Readable>;
   downloadSignature(address: Address, num: number): Promise<string>;
+  downloadTxHash(address: Address, num: number): Promise<string>;
   uploadData(
     address: Address,
     transcriptNumber: number,

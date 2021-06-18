@@ -1,7 +1,7 @@
 import { Mutex } from 'async-mutex';
 import moment, { Moment } from 'moment';
 import { cloneMpcState, EthNet, hashFiles, MpcServer, MpcState, Participant, PatchState, ResetState, FileStoreRecord} from 'setup-mpc-common';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 import { getGeoData } from './maxmind';
 import { ParticipantSelector, ParticipantSelectorFactory } from './participant-selector';
 import { StateStore } from './state-store';
@@ -13,7 +13,8 @@ import { selectParticipants } from './state/select-participants';
 import { TranscriptStore, TranscriptStoreFactory } from './transcript-store';
 import { Verifier } from './verifier';
 import { EvidenceStore } from './evidence';
-import { bufferToHex } from "@fksyuan/web3x/utils";
+import { bufferToHex } from "@alayanetwork/web3x/utils";
+import { writeFileAsync } from "./fs-async";
 
 export class Server implements MpcServer {
   private interval?: NodeJS.Timer;
@@ -361,6 +362,10 @@ export class Server implements MpcServer {
     return this.store.getTranscriptSignature(address, num);
   }
 
+  public async downloadTxHash(address: Address, num: number) {
+    return this.store.getTranscriptTxHash(address, num);
+  }
+
   public async uploadData(address: Address, transcriptNumber: number, transcriptPath: string, signaturePath: string) {
     const p = this.getAndAssertRunningParticipant(address);
 
@@ -478,10 +483,15 @@ export class Server implements MpcServer {
       console.log(`Start saving ${p.address} transacripts to evidence, waiting a moment`);
       for(var num = 0; num < this.state.filesCount; num++) {
         try {
+          const { HOSTURL = "" } = process.env;
+          const endPoint = `${HOSTURL}/api/data/${p.address}/file_${num}.dat`
           const transcriptPath = await this.store.getVerifiedTranscriptPath(p.address, num);
           const transcriptHash = await hashFiles([transcriptPath]);
+          console.log('transcriptHash=', bufferToHex(transcriptHash));
           const transcriptSign = await this.store.getTranscriptSignature(p.address, num);
-          const txReceipt = await this.evidenceStore.saveEvidence(p.address.toString(), bufferToHex(transcriptHash), transcriptSign, transcriptPath, num, Date.now());
+          const txReceipt = await this.evidenceStore.saveEvidence(p.address.toString(), bufferToHex(transcriptHash), transcriptSign, endPoint, num, Date.now());
+          const txHash = txReceipt.transactionHash;
+          await writeFileAsync(this.store.getVerifiedTxHashPath(p.address, num), txHash);
         } catch(err) {
           console.log(`saveEvidence ${p.address} ${num} error: ${err}`);
         }

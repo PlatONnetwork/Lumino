@@ -141,6 +141,7 @@ export class Compute {
       } else {
         args.push('--genesis');
       }
+      // console.log("Start compute at: ", new Date());
       const setup = spawn(binPath, args);
       this.setupProc = setup;
 
@@ -162,6 +163,7 @@ export class Compute {
         this.setupProc = undefined;
         this.uploader.end();
         if (code === 0) {
+          // console.log("Compute complete at: ", new Date())
           //console.error(`Compute complete.`);
           resolve();
         } else {

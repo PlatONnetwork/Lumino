@@ -1,8 +1,8 @@
 import moment from 'moment';
 import { applyDelta, cloneParticipant, MpcServer, MpcState } from 'setup-mpc-common';
 import { Writable } from 'stream';
-import { Account } from '@fksyuan/web3x/account';
-import { Address } from '@fksyuan/web3x/address';
+import { Account } from '@alayanetwork/web3x/account';
+import { Address } from '@alayanetwork/web3x/address';
 import { Compute } from './compute';
 import { TerminalInterface } from './terminal-interface';
 import { TerminalKit } from './terminal-kit';

@@ -1,10 +1,11 @@
 import router from '../router/index'
-const newWin = (name, address, total) => {
+const newWin = (name, address, total, whichSide) => {
   const { href } = router.resolve({
     name,
     query: {
       address,
-      total
+      total,
+      whichSide
     }
   })
   window.open(href, '_blank')

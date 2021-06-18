@@ -1,12 +1,13 @@
-import {Contract, ContractAbi} from "@fksyuan/web3x/contract";
-import {HttpProvider} from "@fksyuan/web3x/providers";
-import {Eth} from "@fksyuan/web3x/eth";
-import {numberToHex, bufferToHex, hexToBuffer} from "@fksyuan/web3x/utils";
-import {Account} from "@fksyuan/web3x/account";
+import {Contract, ContractAbi} from "@alayanetwork/web3x/contract";
+import {HttpProvider} from "@alayanetwork/web3x/providers";
+import {Eth} from "@alayanetwork/web3x/eth";
+import {numberToHex, bufferToHex, hexToBuffer} from "@alayanetwork/web3x/utils";
+import { Account } from "@alayanetwork/web3x/account";
+import { Address } from "@alayanetwork/web3x/address";
 import {toBech32Address} from "@alayanetwork/web3-utils";
 import utf8 from "utf8";
 import {Network, getNetwork} from "./network";
-import { TransactionReceipt } from "@fksyuan/web3x/formatters";
+import { TransactionReceipt } from "@alayanetwork/web3x/formatters";
 
 export interface EvidenceRecord {
     fileHash: string;
@@ -38,6 +39,7 @@ export class EvidenceStore implements Evidence {
     private eth: Eth;
     private contract: Contract;
     private account: Account;
+    private owner: Account | undefined;
 
     constructor(private ethNet: string, private abi: string, private contractAddr: string) {
         this.network = getNetwork(ethNet);
@@ -46,8 +48,11 @@ export class EvidenceStore implements Evidence {
         this.eth = new Eth(new HttpProvider(this.network.host))
         // @ts-ignore
         this.contract = new Contract(this.eth, new ContractAbi(JSON.parse(abi)), contractAddr);
-        const { ADMIN_PRIVATE_KEY = '0xa3078b3cb624bdf9c213f029ae87f2d8b0e02f6a3da046cdfd1d7db282cf4bd2' } = process.env
+        const { ADMIN_PRIVATE_KEY = '', OWNER_PRIVATE_KEY = '' } = process.env
         this.account = Account.fromPrivate(hexToBuffer(ADMIN_PRIVATE_KEY));
+        if (OWNER_PRIVATE_KEY != '') {
+            this.owner = Account.fromPrivate(hexToBuffer(OWNER_PRIVATE_KEY));
+        }
     }
 
     public async waitToGetTxReceipt(txHash: string) :Promise<TransactionReceipt> {
@@ -98,5 +103,93 @@ export class EvidenceStore implements Evidence {
             fileUploadTime: parseInt(res.fUpLoadTime),
             owner: address,
         };
+    }
+
+    public async setOwner(address: string) : Promise<TransactionReceipt> {
+        const gasPrice = numberToHex(await this.eth.getGasPrice());
+        const gas = numberToHex((await this.eth.getBlock("latest")).gasLimit);
+        // @ts-ignore
+        const from = toBech32Address(this.network.hrp, bufferToHex(this.owner.address.toBuffer()).toString().slice(2));
+        const to = this.contractAddress;
+
+        const data = bufferToHex(this.contract.methods["setOwner"].apply(this.contract.methods, [address]).encodeABI()).toString().slice(2);
+        // @ts-ignore
+        const nonce = numberToHex(await this.eth.getTransactionCount(from));
+        const chainId = this.network.chainId;
+        const tx = { from, gasPrice, gas, nonce, chainId, data, to };
+        // console.log("tx: ", tx);
+        // @ts-ignore
+        const signTx = await this.owner.signTransaction(tx, this.eth);
+        // console.log("signTx: ", signTx);
+        let txHash = await this.eth.sendSignedTransaction(signTx.rawTransaction).getTxHash();
+        console.log("setOwner 交易Hash: ", txHash);
+        const receipt = await this.waitToGetTxReceipt(txHash);
+        return receipt;
+    }
+
+    public async setAdmin(address: string) : Promise<TransactionReceipt> {
+        const gasPrice = numberToHex(await this.eth.getGasPrice());
+        const gas = numberToHex((await this.eth.getBlock("latest")).gasLimit);
+        // @ts-ignore
+        const from = toBech32Address(this.network.hrp, bufferToHex(this.owner.address.toBuffer()).toString().slice(2));
+        const to = this.contractAddress;
+
+        const data = bufferToHex(this.contract.methods["setAdmin"].apply(this.contract.methods, [address]).encodeABI()).toString().slice(2);
+        // @ts-ignore
+        const nonce = numberToHex(await this.eth.getTransactionCount(from));
+        console.log("from: ", from, nonce);
+        const chainId = this.network.chainId;
+        const tx = { from, gasPrice, gas, nonce, chainId, data, to };
+        console.log("tx: ", tx);
+        // @ts-ignore
+        const signTx = await this.owner.signTransaction(tx, this.eth);
+        // console.log("signTx: ", signTx);
+        let txHash = await this.eth.sendSignedTransaction(signTx.rawTransaction).getTxHash();
+        console.log("setAdmin 交易Hash: ", txHash);
+        const receipt = await this.waitToGetTxReceipt(txHash);
+        return receipt;
+    }
+
+    public async getOwner() : Promise<Address> {
+        // @ts-ignore
+        const from = toBech32Address(this.network.hrp, bufferToHex(this.owner.address.toBuffer()).toString().slice(2));
+        // 查看代币名称
+        const getMethod = this.contract.methods["owner"].apply(this.contract.methods, []);
+        // @ts-ignore
+        const res = await getMethod.call({from}, "latest");
+        return res
+    }
+
+    public async getAdmin() : Promise<Address> {
+        // @ts-ignore
+        const from = toBech32Address(this.network.hrp, bufferToHex(this.owner.address.toBuffer()).toString().slice(2));
+        // 查看代币名称
+        const getMethod = this.contract.methods["admin"].apply(this.contract.methods, []);
+        // @ts-ignore
+        const res = await getMethod.call({from}, "latest");
+        return res
+    }
+
+    public async kill() : Promise<TransactionReceipt> {
+        const gasPrice = numberToHex(await this.eth.getGasPrice());
+        const gas = numberToHex((await this.eth.getBlock("latest")).gasLimit);
+        // @ts-ignore
+        const from = toBech32Address(this.network.hrp, bufferToHex(this.owner.address.toBuffer()).toString().slice(2));
+        const to = this.contractAddress;
+
+        const data = bufferToHex(this.contract.methods["kill"].apply(this.contract.methods, []).encodeABI()).toString().slice(2);
+        // @ts-ignore
+        const nonce = numberToHex(await this.eth.getTransactionCount(from));
+        console.log("from: ", from, nonce);
+        const chainId = this.network.chainId;
+        const tx = { from, gasPrice, gas, nonce, chainId, data, to };
+        console.log("tx: ", tx);
+        // @ts-ignore
+        const signTx = await this.owner.signTransaction(tx, this.eth);
+        // console.log("signTx: ", signTx);
+        let txHash = await this.eth.sendSignedTransaction(signTx.rawTransaction).getTxHash();
+        console.log("kill 交易Hash: ", txHash);
+        const receipt = await this.waitToGetTxReceipt(txHash);
+        return receipt;
     }
 }

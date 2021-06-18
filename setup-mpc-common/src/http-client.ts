@@ -4,9 +4,9 @@ import https from 'https';
 import fetch from 'isomorphic-fetch';
 import progress from 'progress-stream';
 import { Readable } from 'stream';
-import { Account } from '@fksyuan/web3x/account';
-import { Address } from '@fksyuan/web3x/address';
-import { bufferToHex } from '@fksyuan/web3x/utils';
+import { Account } from '@alayanetwork/web3x/account';
+import { Address } from '@alayanetwork/web3x/address';
+import { bufferToHex } from '@alayanetwork/web3x/utils';
 import { hashFiles } from './hash-files';
 import { MpcServer, MpcState, Participant, PatchState, ResetState, FileStoreRecord } from './mpc-server';
 import { mpcStateFromJSON } from './mpc-state';
@@ -42,7 +42,10 @@ export class HttpClient implements MpcServer {
       throw new Error('No account provided. Can only request server state, not modify.');
     }
     const { signature } = this.account.sign('SignMeWithYourPrivateKey');
-    const response = await fetch(`${this.apiUrl}/participant/${address.toString().toLowerCase()}`, {
+    const url = new URL(`${this.apiUrl}/participant/${address.toString().toLowerCase()}`);
+    console.log(`addParticipant tier=${tier}`);
+    url.searchParams.append('tier', `${tier}`);
+    const response = await fetch(url.toString(), {
       ...this.opts,
       method: 'PUT',
       headers: {
@@ -128,6 +131,17 @@ export class HttpClient implements MpcServer {
     const response = await fetch(
       `${this.apiUrl}/signature/${address.toString().toLowerCase()}/${transcriptNumber}`,
       this.opts
+    );
+    if (response.status !== 200) {
+      throw new Error(`Download failed, bad status code: ${response.status}`);
+    }
+    return (response.body! as any) as string;
+  }
+
+  public async downloadTxHash(address: Address, transcriptNumber: number) {
+    const response = await fetch(
+        `${this.apiUrl}/txHash/${address.toString().toLowerCase()}/${transcriptNumber}`,
+        this.opts
     );
     if (response.status !== 200) {
       throw new Error(`Download failed, bad status code: ${response.status}`);

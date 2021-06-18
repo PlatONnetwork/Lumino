@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@alayanetwork/web3-utils": "^0.13.3",
-    "@fksyuan/web3x": "^4.0.3",
+    "@alayanetwork/web3x": "^4.0.3",
     "@koa/cors": "^3.0.0",
     "@types/bn.js": "^4.11.5",
     "@types/node": "^12.6.8",
@@ -49,7 +49,8 @@
     "stream-meter": "^1.0.4",
     "tsc-watch": "^2.2.1",
     "typescript": "^3.5.3",
-    "utf8": "^3.0.0"
+    "utf8": "^3.0.0",
+    "yargs": "16.2.0"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.35",

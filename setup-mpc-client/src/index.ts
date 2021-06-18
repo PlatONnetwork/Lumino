@@ -1,6 +1,6 @@
 import { HttpClient } from 'setup-mpc-common';
-import { Account } from '@fksyuan/web3x/account';
-import { hexToBuffer } from '@fksyuan/web3x/utils';
+import { Account } from '@alayanetwork/web3x/account';
+import { hexToBuffer } from '@alayanetwork/web3x/utils';
 import { App } from './app';
 
 async function main() {

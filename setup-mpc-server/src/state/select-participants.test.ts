@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { MpcState } from 'setup-mpc-common';
-import { hexToBuffer } from '@fksyuan/web3x/utils';
-import { Wallet } from '@fksyuan/web3x/wallet';
+import { hexToBuffer } from '@alayanetwork/web3x/utils';
+import { Wallet } from '@alayanetwork/web3x/wallet';
 import { createParticipant } from './create-participant';
 import { defaultState } from './default-state';
 import { orderWaitingParticipants } from './order-waiting-participants';

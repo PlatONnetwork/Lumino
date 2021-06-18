@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 import { MpcState, Participant } from './mpc-server';
 
 export function mpcStateFromJSON(json: any): MpcState {

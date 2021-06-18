@@ -1,6 +1,6 @@
 # setup-mpc-server
 
-This project contains the coordination server for the PlatON Trustless Setup Multi-Party Computation.
+This project contains the coordination server for the Latticex Trustless Setup Multi-Party Computation.
 
 It provides a simple JSON API for coordination of all participants in the ceremony.
 
@@ -28,22 +28,16 @@ Reset the server. Provide a starting state in the body. `startTime` and `endTime
 	"endTime": 60,
 	"selectBlock": -1,
 	"invalidateAfter": 7600,
-	"numG1Points": 1008000,
-	"numG2Points": 1,
-	"pointsPerTranscript": 50400,
-	"maxTier2": 5,
+	"filesCount": 17,
+	"maxTier2": 100,
 	"minParticipants": 1,
 	"participants": [
-		"0xbd38ef2e1b28b1e9de4e9f4dcb73e53f2ad23a42",
-		"0xd528f97aeb2297007f9348b295ee2d475918d517",
-		"0x93aecbc2c40caa8f48fbeeb37c2d53a75595f97f",
-		"0xa40a3556417b8ed46792057307a0ddf9338a83cb",
-	    "0x9636ea9c10bb6fc903a4c753df93a064cae313c8",
-    	"0x6bd7ea43fb9e05f551ad4128dd8e412b15b6a770",
-    	"0x5e5aab22d5e22d47efc84f99d22b864a129a7cae",
-    	"0xc6b1c9e9961d2cf7055b35dfbb09db3978e61419",
-    	"0x3a548c928408762bfe12267246d4d1b6bc58a150",
-    	"0xaf48021c027fa9de7f915d1899d5372de0270e9f"
+		"atp10fy6qc99mfzkvwzc4wqn63hvttgahs66cgrwe3",
+		"atp1wxadw8yzr6qxdw5yl3f2surp6ue6f03ekgqqlh",
+		"atp1v79jh55uq97k2ueqf7f2um2yy8a5jsnxzfpdr8",
+		"atp15c2697lu35juh4gc9pa2acp069mjfq85z9x8sv",
+		"atp1r23vf7kahe5cx0j430ywm2xc4gwacl9a9hny0u",
+		"atp15xrye42ffll2rhtq5we7npg2sakulul6faws2x"
 	]
 }
 ```

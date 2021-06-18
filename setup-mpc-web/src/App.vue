@@ -1,5 +1,7 @@
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive include="Download">
+      <router-view inc />
+    </keep-alive>
   </div>
 </template>

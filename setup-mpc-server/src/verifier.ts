@@ -1,6 +1,6 @@
 import { ChildProcess, spawn } from 'child_process';
 import { MemoryFifo } from 'setup-mpc-common';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 import { TranscriptStore } from './transcript-store';
 
 export interface VerifyItem {

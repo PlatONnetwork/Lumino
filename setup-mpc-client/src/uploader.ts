@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { unlink } from 'fs';
 import { MemoryFifo, MpcServer } from 'setup-mpc-common';
-import { Address } from '@fksyuan/web3x/address';
+import { Address } from '@alayanetwork/web3x/address';
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -14,7 +14,7 @@ export class Uploader extends EventEmitter {
   }
 
   public async run() {
-    //console.error('Uploader starting...');
+    // console.log('Uploader starting at: ', new Date());
     while (true) {
       const num = await this.queue.get();
       if (num === null) {
@@ -22,7 +22,7 @@ export class Uploader extends EventEmitter {
       }
       await this.uploadTranscriptWithRetry(num);
     }
-    //console.error('Uploader complete.');
+    // console.log('Uploader complete at: ', new Date());
   }
 
   public put(transcriptNum: number) {

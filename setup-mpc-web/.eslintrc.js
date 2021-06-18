@@ -12,11 +12,11 @@ module.exports = {
   // add your custom rules here
   rules: {
     'vue/max-attributes-per-line': [
-      2,
+      "error",
       {
-        singleline: 10,
+        singleline: 6,
         multiline: {
-          max: 1,
+          max: 3,
           allowFirstLine: false
         }
       }
@@ -70,7 +70,7 @@ module.exports = {
     ],
     'handle-callback-err': [2, '^(err|error)$'],
     indent: [
-      2,
+      'error',
       2,
       {
         SwitchCase: 1
