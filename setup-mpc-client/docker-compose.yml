@@ -1,0 +1,9 @@
+version: '3'
+services:
+  setup-mpc-client:
+    build: .
+    image: setup-mpc-client
+    tty: true
+    environment:
+      API_URL: 'http://192.168.33.103:8080/api'
+      PRIVATE_KEY: '0x75c59ab2ab59202d874ddeda943041ab03ed9a785d1ac503011c8f054af187b0'

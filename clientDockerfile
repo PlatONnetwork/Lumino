@@ -1,0 +1,48 @@
+FROM ubuntu:18.04
+ARG CURVE=bn_curve
+ENV TZ=Asia/Shanghai
+ENV NODE_VERSION=10.18.1
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update && \
+  apt-get install -y build-essential curl python
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
+RUN npm install -g yarn
+
+RUN apt-get update
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
+ENV PATH="/root/.cargo/bin:${PATH}"
+# Check cargo is visible
+RUN cargo --help
+
+WORKDIR /root/setup/setup-mpc-common
+COPY setup-mpc-common .
+RUN yarn install && yarn build && yarn link
+
+WORKDIR /root/setup/setup-mpc-client
+COPY setup-mpc-client .
+RUN yarn link setup-mpc-common
+RUN yarn install && yarn build
+
+
+WORKDIR /root/setup/algorithm
+COPY algorithm .
+RUN ls -ltr .
+RUN cargo build --release --features ${CURVE}
+
+# WORKDIR /usr/src/setup-mpc-common
+# COPY --from=0 /usr/src/setup-mpc-common .
+# RUN echo $(ls -ltr /usr/src/setup-mpc-common)
+# RUN yarn link
+
+WORKDIR /root/setup/setup-mpc-client
+# COPY --from=0 /usr/src/setup-mpc-client .
+
+CMD [ "yarn",  "start" ]

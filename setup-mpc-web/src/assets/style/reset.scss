@@ -1,0 +1,226 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v5.0.1 | 20191019
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+menu,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+  display: none;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  line-height: 1;
+  font-size: 12px;
+}
+menu,
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table,
+thead,
+tbody {
+  display: block;
+}
+
+/*包含以下四种的链接*/
+a {
+  text-decoration: none;
+}
+/*正常的未被访问过的链接*/
+a:link {
+  text-decoration: none;
+}
+/*已经访问过的链接*/
+a:visited {
+  text-decoration: none;
+}
+/*鼠标划过(停留)的链接*/
+a:hover {
+  text-decoration: none;
+}
+/* 正在点击的链接*/
+a:active {
+  text-decoration: none;
+}
+
+:focus {
+  outline: none;
+}
+
+.router-link-active {
+  text-decoration: none;
+}
+.font-r {
+  font-family: AlibabaPuHuiTi-Regular;
+}
+.font-m {
+  font-family: AlibabaPuHuiTi-Medium;
+}
+.font-b {
+  font-family: AlibabaPuHuiTi-Bold;
+}
+.pointer {
+  cursor: pointer;
+}
+.green {
+  color: #00fdbd;
+}
+
+.orange {
+  color: #ff5133;
+}
+
+.x-hidden {
+  overflow-x: hidden !important;
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+tbody thead {
+  width: calc(100% + 20px);
+}
+
+a:link {
+  color: rgb(212, 212, 212);
+}
+/* 未被访问的链接 蓝色 */
+a:visited {
+  color: rgb(212, 212, 212);
+}
+/* 已被访问过的链接 蓝色 */
+a:hover {
+  color: rgb(31, 219, 233);
+}
+/* 鼠标悬浮在上的链接 蓝色 */
+a:active {
+  color: rgb(31, 219, 233);
+} /* 鼠标点中激活链接 蓝色 */

@@ -1,0 +1,15 @@
+name: setup-mpc-client
+build:
+  default:
+    cmd: ../ci-scripts/build.sh
+    args:
+      - aztecprotocol/setup-mpc-client
+      - '278380418400.dkr.ecr.eu-west-2.amazonaws.com/setup-mpc-common 278380418400.dkr.ecr.eu-west-2.amazonaws.com/setup-tools'
+commands:
+  deploy-public:
+    cmd: ../ci-scripts/deploy-public.sh
+    args:
+      - setup-mpc-client
+dependencies:
+  - setup-mpc-common
+  - setup-tools

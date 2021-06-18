@@ -1,0 +1,11 @@
+name: setup-mpc-common
+build:
+  default:
+    cmd: ../ci-scripts/build.sh
+    args:
+      - 278380418400.dkr.ecr.eu-west-2.amazonaws.com/setup-mpc-common
+commands:
+  deploy:
+    cmd: ../ci-scripts/deploy.sh
+    args:
+      - setup-mpc-common
