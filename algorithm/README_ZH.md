@@ -5,7 +5,8 @@ https://www.rust-lang.org/tools/install
 # 2. 编译
 
 ## 2.1 编译setup, verify(曲线bn256)
-注：bn256和bn254实质上是同一条曲线。由于历史原因，不同的社区如以太坊称为bn254,而在一些其他场合如ietf(https://tools.ietf.org/id/draft-yonezawa-pairing-friendly-curves-00.html)称为bn256。算法代码沿用bn256的习惯。
+注：bn256和bn254实质上是同一条曲线。由于历史原因，不同的社区如以太坊称为bn254,而在一些其他场合如ietf (https://tools.ietf.org/id/draft-yonezawa-pairing-friendly-curves-00.html)
+称为bn256。算法代码沿用bn256的习惯。
 
 ```shell
 $ cargo build --release --features bn_curve
