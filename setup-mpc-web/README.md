@@ -45,7 +45,7 @@ yarn lint
     }
    
     location /api/ {
-            proxy_pass http://10.10.8.176:8080/api/;  // BN256 request forwarding
+            proxy_pass http://10.10.8.176:8080/api/;  // BN254 request forwarding
             proxy_redirect          default;
             proxy_set_header        Host $host:$proxy_port;
             proxy_set_header        X-Real-IP $remote_addr;

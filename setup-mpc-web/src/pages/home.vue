@@ -40,7 +40,7 @@
             src="../assets/images/complete.svg"
             alt=""
           />
-          <span class="title">BN256</span>
+          <span class="title">BN254</span>
         </p>
         <table
           width="100%"
