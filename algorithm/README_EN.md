@@ -1,3 +1,7 @@
+Note: for historical reasons, bn254 and bn256 actually refer to the same pairing-friendly elliptic curve. Ethereum community uses bn254, while other places
+like ietf (https://tools.ietf.org/id/draft-yonezawa-pairing-friendly-curves-00.html)
+uses bn256. In this algorithm module, we use "bn256" to follow the Plonk community.
+
 # 1. Install Rust
 
 https://www.rust-lang.org/tools/install
