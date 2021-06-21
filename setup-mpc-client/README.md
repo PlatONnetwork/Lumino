@@ -19,6 +19,7 @@ sudo docker pull gcr.io/lumino-server/setup-mpc-client-bn:1.0.0  ## bn version i
 
 ## If you are unable to access the external network and cannot pull the image, you can use the following command to pull the image
 sudo docker pull registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bn:1.0.0
+sudo docker images ## search the image id of the corresponding image
 sudo docker tag <image id> setup-mpc-client-bn:latest
 
 ## Download the bls version image
@@ -26,6 +27,7 @@ sudo docker pull gcr.io/lumino-server/setup-mpc-client-bls:1.0.0 ## bls version 
 
 ## If you are unable to access the external network and cannot pull the image, you can use the following command to pull the image
 sudo docker pull registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bls:1.0.0
+sudo docker images ## search the image id of the corresponding image
 sudo docker tag <image id> setup-mpc-client-bls:latest
 ```
 
