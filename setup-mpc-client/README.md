@@ -18,32 +18,70 @@ For experienced users that wish to perform the computation as fast as possible, 
 
 To ensure the user has the latest version of the client application, first run:
 
+### bn version
+
++ pull docker images
 ```
 ## Download the bn version image
 sudo docker pull gcr.io/lumino-server/setup-mpc-client-bn:1.0.0  ## bn version image
 
 ## If you are unable to access the external network and cannot pull the image, you can use the following command to pull the image
 sudo docker pull registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bn:1.0.0
-sudo docker images ## search the image id of the corresponding image
+```
+
++ tag docker image
+
+```
+## search pulled docker image id
+sudo docker images
+
+Example docker images show: 
+REPOSITORY                                                                  TAG       IMAGE ID       CREATED      SIZE
+registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bn    1.0.0     3549355da488   4 days ago   2.17GB
+
+## tag docker image
 sudo docker tag <image id> setup-mpc-client-bn:latest
 
+Example:
+sudo docker tag 3549355da488 setup-mpc-client-bn:latest
+```
+
+### bls version
+
++ pull docker images
+```
 ## Download the bls version image
-sudo docker pull gcr.io/lumino-server/setup-mpc-client-bls:1.0.0 ## bls version image
+sudo docker pull gcr.io/lumino-server/setup-mpc-client-bls:1.0.0  ## bn version image
 
 ## If you are unable to access the external network and cannot pull the image, you can use the following command to pull the image
 sudo docker pull registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bls:1.0.0
-sudo docker images ## search the image id of the corresponding image
-sudo docker tag <image id> setup-mpc-client-bls:latest
 ```
 
++ tag docker image
+```
+## search pulled docker image id
+sudo docker images
+
+Example docker images show: 
+REPOSITORY                                                                  TAG       IMAGE ID       CREATED      SIZE
+registry-intl.cn-shenzhen.aliyuncs.com/lumino-server/setup-mpc-client-bls    1.0.0     54dc98b49b1e   4 days ago   2.17GB
+
+## tag docker image
+sudo docker tag <image id> setup-mpc-client-bls:latest
+
+Example:
+sudo docker tag 54dc98b49b1e setup-mpc-client-bls:latest
+```
+
+### Launch client application
 The client application can be launched as follows:
 
 ```
 ## Start the docker service of the bn version client
-docker run -it -e API_URL=https://lumino.latticex.foundation/api -e PRIVATE_KEY=<private key hex> setup-mpc-client-bn:latest
+docker run -it -e API_URL=https://lumino.latticex.foundation/api -e PRIVATE_KEY=<private key hex start with 0x> setup-mpc-client-bn:latest
 
 ## Start the docker service of the bls version client
-docker run -it -e API_URL=https://lumino-bls.latticex.foundation/api -e PRIVATE_KEY=<private key hex> setup-mpc-client-bls:latest
+docker run -it -e API_URL=https://lumino-bls.latticex.foundation/api -e PRIVATE_KEY=<private key hex start with 0x> setup-mpc-client-bls:latest
 ```
 or
 
@@ -55,7 +93,7 @@ services:
     image: setup-mpc-client-bn ## Take the bn version as an example, if you need to start the bls version, modify it to setup-mpc-client-bls
     tty: true
     environment:
-      API_URL: 'https://lumino.latticex.foundation/api' ## bls版本对应的URL为https://lumino-bls.latticex.foundation/api
+      API_URL: 'https://lumino.latticex.foundation/api' ## bls version API_URL setting to https://lumino-bls.latticex.foundation/api
       PRIVATE_KEY: '0x75c59ab2ab59202d874ddeda943041ab03ed9a785d1ac503011c8f054af187b0'
 ```
 
