@@ -1,3 +1,8 @@
+## Machine Configuration
+
+We recommend a basic machine configuration as: 4 cores 8 GB RAM, plus a free storage of 12 GB. For the Internet, we recommend at least 1 Mb for upload and download.
+You can use a local PC like a desktop or laptop, or you can setup a cloud machine instance to join Lumino. Our back-end servers for both elliptic curves are located in Google Cloud Singapore.
+
 ## Installing Docker
 
 To run the docker container you must first have installed Docker.
