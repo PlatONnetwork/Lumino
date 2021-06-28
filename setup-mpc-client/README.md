@@ -77,10 +77,10 @@ sudo docker tag 54dc98b49b1e setup-mpc-client-bls:latest
 The client application can be launched as follows:
 
 ```
-## Start the docker service of the bn version client
+## Start the docker service of the bn version client (Start in non-background mode, do not disconnect the terminal connection (such as ssh connection))
 docker run -it -e API_URL=https://lumino.latticex.foundation/api -e PRIVATE_KEY=<private key hex start with 0x> setup-mpc-client-bn:latest
 
-## Start the docker service of the bls version client
+## Start the docker service of the bls version client (Start in non-background mode, do not disconnect the terminal connection (such as ssh connection))
 docker run -it -e API_URL=https://lumino-bls.latticex.foundation/api -e PRIVATE_KEY=<private key hex start with 0x> setup-mpc-client-bls:latest
 ```
 or
@@ -98,6 +98,7 @@ services:
 ```
 
 ```
+### Start in background mode
 sudo docker-compose -f docker-compose.yml up -d
 ```
 
